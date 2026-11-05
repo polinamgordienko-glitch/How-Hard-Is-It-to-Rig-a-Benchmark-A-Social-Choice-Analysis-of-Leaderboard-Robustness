@@ -11,7 +11,7 @@ For a fixed suite of datasets and a fixed set of competing models,
 how many tasks must a model developer include in training to make
 a target model top-ranked?
 
-![Robustness under four aggregation rules on MMLU and BBH](ecdf.png)
+![Robustness under four aggregation rules on MMLU and BBH](ecdf_figure.png)
 
 This repository contains the code for the experiments in our paper.
 We compute instance-level robustness under arithmetic mean, median,
