@@ -1,8 +1,49 @@
-# How Hard Is It to Rig a Benchmark? A Social Choice Analysis of Leaderboard Robustness
+# How Hard Is It to Rig a Benchmark?
+## A Social Choice Analysis of Leaderboard Robustness
 
-## Introduction
+**Accepted at NeurIPS 2026**
 
-This repository contains the code to reproduce all experiments in our paper titled "How Hard Is It to Rig a Benchmark? A Social Choice Analysis of Leaderboard Robustness". Starting from MMLU and BBH model scores, the script "robustness_code.R" constructs complete score matrices, computes instance-level robustness under arithmetic mean, median, mean win rate and pairwise majority and runs all sensitivity analyses. 
+Polina Gordienko · Georg Schollmeyer · Frauke Kreuter · Christoph Jansen
+
+[Paper](paper.pdf)
+
+For a fixed suite of datasets and a fixed set of competing models,
+how many tasks must a model developer include in training to make
+a target model top-ranked?
+
+This repository contains the code for the experiments in our paper.
+We compute instance-level robustness under arithmetic mean, median,
+mean win rate and pairwise majority on MMLU under HELM and BIG-Bench
+Hard under the Open LLM Leaderboard.
+
+## Contents
+
+- `robustness_code.R`: robustness computations, statistical analyses,
+  additional experiments and figures.
+- `download_bbh.py`: extraction of BBH scores from the fixed
+  Open LLM Leaderboard results snapshot.
+- `model_size_analysis_corrected.py`: preparation and verification
+  of BBH model-size data.
+- `data/bbh_sizes.csv`: model parameter counts for the BBH analysis.
+- `data/mmlu_costs.csv`: MMLU test-instance counts by subject.
+- `data/bbh_costs.csv`: BBH test-instance counts by task.
+
+## Requirements
+
+The analysis uses R and the packages `jsonlite`, `dplyr`, `tibble`,
+`digest`, `lpSolve`, `tidyr` and `ggplot2`.
+
+Install them with:
+
+```r
+install.packages(
+  c("jsonlite", "dplyr", "tibble", "digest", "lpSolve", "tidyr", "ggplot2"),
+  repos = "https://cloud.r-project.org"
+)
+```
+
+Python is used only for data preparation. It is not required to run
+the R analysis when using the supplied scores and metadata.
 
 The code was tested with R version 4.4.2 on macOS Sequoia 15.7.3.
 
@@ -46,20 +87,86 @@ On  Windows PowerShell, set the token with:
 $env:HF_TOKEN="YOUR_TOKEN"
 ```
 
-After downloading via Option A or B, the code expects the HELM MMLU results to be placed in a folder structure that looks like this (schematically):
+After downloading via Option A or B, place the HELM MMLU run files and BBH score file in the following
+locations:
 
 ```text
-helm_mmlu/
+~/helm_mmlu/
   runs/
     v1.0.0/
-      <RUN_ID_1>/
+      <run directory>/
         run_spec.json
         stats.json
-      ...
-```
-The key point is: under helm_mmlu/runs/v1.0.0/ there should be many run directories (each a run id), and each run directory should contain at least run_spec.json and stats.json.
 
-For BBH,if you download the BBH data manually, save it as:
-```text
-~/bbh_analysis/bbh_scores.csv
+~/bbh_analysis/
+  bbh_scores.csv
 ```
+
+From the repository directory, copy the supplied metadata files:
+
+```bash
+mkdir -p ~/helm_mmlu ~/bbh_analysis
+cp data/mmlu_costs.csv ~/helm_mmlu/
+cp data/bbh_costs.csv data/bbh_sizes.csv ~/bbh_analysis/
+```
+
+## Reproducing the results
+
+From the repository directory, run:
+
+```bash
+Rscript --vanilla robustness_code.R
+```
+
+The script computes:
+
+- Raw and normalized robustness under all four aggregation rules.
+- Bootstrap intervals and paired Wilcoxon tests.
+- The BBH analysis retaining one model per namespace.
+- Comparisons of robustness between aggregation rules.
+- Robustness for the quarter of models with the highest mean score.
+- The BBH model-size analysis.
+- Minimum costs when dataset costs equal test-instance counts.
+- The empirical CDF figures.
+
+For the strongest-quarter and model-size analyses, we summarize
+the selected target models while retaining the competing models
+within each analysis.
+
+## Outputs
+
+MMLU robustness results are saved in `~/helm_mmlu/`.
+The combined summaries and additional results are saved in
+`~/bbh_analysis/`.
+
+The main output files include:
+
+- `all_results.rds`: the original robustness and statistical results.
+- `additional_results.rds`: the additional analyses.
+- `norm_sum.csv`: median normalized robustness.
+- `cmp_sum.csv`: counts of comparisons between aggregation rules.
+- `top_sum.csv`: strongest-quarter results.
+- `size_sum.csv` and `size_rho.csv`: model-size results.
+- `cost_sum.csv` and `cost_pct.csv`: heterogeneous-cost results.
+- `ecdf.pdf` and `bbh_dup_ecdf.pdf`: figures.
+- `sessionInfo.txt`: the R version and package versions used.
+
+## Citation
+
+If you use this code or the results, please cite:
+
+```bibtex
+@inproceedings{gordienko2026rig,
+  title     = {How Hard Is It to Rig a Benchmark?
+               A Social Choice Analysis of Leaderboard Robustness},
+  author    = {Gordienko, Polina and Schollmeyer, Georg
+               and Kreuter, Frauke and Jansen, Christoph},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}
+```
+
+## Questions
+
+Please open a GitHub issue for questions about the code or
+reproducing the results.
