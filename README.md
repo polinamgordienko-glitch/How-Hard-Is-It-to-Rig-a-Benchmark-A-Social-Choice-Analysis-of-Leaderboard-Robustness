@@ -68,8 +68,7 @@ Option B.
    - Obtain a Hugging Face token by following
      [these instructions](https://huggingface.co/docs/hub/security-tokens).
 
-   - Run the commands below from the repository root. On macOS/Linux,
-     this can be Terminal. The extraction script `download_bbh.py` is
+   - Run the commands below from the repository root. The extraction script `download_bbh.py` is
      included in this repository. It downloads the public Open LLM
      Leaderboard results dataset, extracts BBH subtasks using
      `acc_norm,none`, and writes `bbh_scores.csv`.
