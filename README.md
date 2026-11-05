@@ -53,20 +53,26 @@ Option A. Download the data for both suites under this link: [https://zenodo.org
 
 Option B. 
 
-1. Download the HELM MMLU raw results (v1.0.0) from the public crfm-helm-public bucket in the Google Cloud Storage (GCS) by completing the following two steps:
+1. Download the HELM MMLU raw results (v1.0.0) from the public
+   `crfm-helm-public` bucket in Google Cloud Storage (GCS):
 
-  1.1.	Install the Google Cloud CLI (gcloud) by following Google’s official instructions: 
-https://docs.cloud.google.com/sdk/docs/install-sdk.
+   - Install the Google Cloud CLI (`gcloud`) by following
+     [Google’s official instructions](https://docs.cloud.google.com/sdk/docs/install-sdk).
 
-  1.2.	Download HELM MMLU raw results by following the official HELM instructions:
-https://crfm-helm.readthedocs.io/en/latest/downloading_raw_results/.
+   - Download the HELM MMLU raw results by following the
+     [official HELM instructions](https://crfm-helm.readthedocs.io/en/latest/downloading_raw_results/).
 
-2. Download the BBH data from the Hugging Face Open LLM Leaderboard. Note that the paper uses the data downloaded on April 18, 2026.
+2. Download the BBH data from the Hugging Face Open LLM Leaderboard.
+   The paper uses the data downloaded on April 18, 2026.
 
+   - Obtain a Hugging Face token by following
+     [these instructions](https://huggingface.co/docs/hub/security-tokens).
 
-  2.1 First, you will require a Hugging Face token, which can be obtained, following the instructions under the following link: https://huggingface.co/docs/hub/security-tokens
-
-  2.2 Then, run the following commands from the repository root. On macOS/Linux this can be Terminal. The extraction script `download_bbh.py` is included in this repository. It downloads the public Open LLM Leaderboard results dataset, extracts BBH subtasks using `acc_norm,none`, and writes `bbh_scores.csv`.
+   - Run the commands below from the repository root. On macOS/Linux,
+     this can be Terminal. The extraction script `download_bbh.py` is
+     included in this repository. It downloads the public Open LLM
+     Leaderboard results dataset, extracts BBH subtasks using
+     `acc_norm,none`, and writes `bbh_scores.csv`.
 
 The R script expects this file to be located at `~/bbh_analysis/bbh_scores.csv`. Therefore, create this directory and run the download script from inside it:
 
