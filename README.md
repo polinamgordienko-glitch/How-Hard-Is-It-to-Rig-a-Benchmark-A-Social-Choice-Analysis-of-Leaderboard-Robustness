@@ -24,8 +24,7 @@ Hard under the Open LLM Leaderboard.
   additional experiments and figures.
 - `download_bbh.py`: extraction of BBH scores from the fixed
   Open LLM Leaderboard results snapshot.
-- `bbh_sizes.py`: preparation and verification
-  of BBH model size data.
+- `bbh_sizes.py`: preparation and verification of BBH model size data.
 - `bbh_sizes.csv`: model parameter counts for the BBH analysis.
 - `mmlu_costs.csv`: MMLU test-instance counts by subject.
 - `bbh_costs.csv`: BBH test-instance counts by task.
@@ -44,10 +43,7 @@ install.packages(
 )
 ```
 
-Python is used only for data preparation. It is not required to run
-the R analysis when using the supplied scores and metadata.
-
-The code was tested with R version 4.4.2 on macOS Sequoia 15.7.3.
+Python is used only for data preparation. The code was tested with R version 4.4.2 on macOS Sequoia 15.7.3.
 
 ## Data
 
@@ -130,14 +126,12 @@ The script computes:
 - Bootstrap intervals and paired Wilcoxon tests.
 - The BBH analysis retaining one model per namespace.
 - Comparisons of robustness between aggregation rules.
-- Robustness for the quarter of models with the highest mean score.
-- The BBH model-size analysis.
+- Robustness for models near the top of the leaderboard.
+- The BBH analysis of model size.
 - Minimum costs when dataset costs equal test-instance counts.
 - The empirical CDF figures.
 
-For the strongest-quarter and model-size analyses, we summarize
-the selected target models while retaining the competing models
-within each analysis.
+For the analyses of model size and models near the top of the leaderboard, we summarize the selected target models while retaining the competing models within each analysis.
 
 ## Outputs
 
@@ -151,10 +145,10 @@ The main output files include:
 - `additional_results.rds`: the additional analyses.
 - `norm_sum.csv`: median normalized robustness.
 - `cmp_sum.csv`: counts of comparisons between aggregation rules.
-- `top_sum.csv`: strongest-quarter results.
-- `size_sum.csv` and `size_rho.csv`: model-size results.
-- `cost_sum.csv` and `cost_pct.csv`: heterogeneous-cost results.
-- `ecdf.pdf` and `bbh_dup_ecdf.pdf`: figures.
+- `top_sum.csv`: results for models near the top of the leaderboard.
+- `size_sum.csv` and `size_rho.csv`: results for model size analysis.
+- `cost_sum.csv` and `cost_pct.csv`: results for heterogeneous costs analysis.
+- `ecdf.pdf`: figure 1.
 - `sessionInfo.txt`: the R version and package versions used.
 
 ## Citation
