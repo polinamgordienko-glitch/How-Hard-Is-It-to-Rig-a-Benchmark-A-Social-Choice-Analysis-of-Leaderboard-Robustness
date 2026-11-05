@@ -156,7 +156,7 @@ The main output files include:
 If you use this code or the results, please cite:
 
 ```bibtex
-@inproceedings{gordienko2026rig,
+@inproceedings{gordienko2026,
   title     = {How Hard Is It to Rig a Benchmark?
                A Social Choice Analysis of Leaderboard Robustness},
   author    = {Gordienko, Polina and Schollmeyer, Georg
