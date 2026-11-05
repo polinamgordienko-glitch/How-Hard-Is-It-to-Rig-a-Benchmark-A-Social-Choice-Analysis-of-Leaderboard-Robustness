@@ -80,12 +80,16 @@ repo_dir="$(pwd)"
 mkdir -p ~/bbh_analysis
 cd ~/bbh_analysis
 
-python -m pip install huggingface_hub pandas pyarrow
+python3 -m pip install huggingface_hub pandas
 export HF_TOKEN="YOUR_TOKEN"
-python "$repo_dir/download_bbh.py"
+python3 "$repo_dir/download_bbh.py"
 
-On  Windows PowerShell, set the token with:
-```text
+cd "$repo_dir"
+```
+
+On Windows PowerShell, set the token with:
+
+```powershell
 $env:HF_TOKEN="YOUR_TOKEN"
 ```
 
