@@ -24,11 +24,11 @@ Hard under the Open LLM Leaderboard.
   additional experiments and figures.
 - `download_bbh.py`: extraction of BBH scores from the fixed
   Open LLM Leaderboard results snapshot.
-- `model_size_analysis_corrected.py`: preparation and verification
-  of BBH model-size data.
-- `data/bbh_sizes.csv`: model parameter counts for the BBH analysis.
-- `data/mmlu_costs.csv`: MMLU test-instance counts by subject.
-- `data/bbh_costs.csv`: BBH test-instance counts by task.
+- `bbh_sizes.py`: preparation and verification
+  of BBH model size data.
+- `bbh_sizes.csv`: model parameter counts for the BBH analysis.
+- `mmlu_costs.csv`: MMLU test-instance counts by subject.
+- `bbh_costs.csv`: BBH test-instance counts by task.
 
 ## Requirements
 
