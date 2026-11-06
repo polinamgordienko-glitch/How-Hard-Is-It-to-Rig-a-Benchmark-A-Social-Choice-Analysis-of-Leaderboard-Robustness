@@ -113,8 +113,8 @@ From the repository directory, copy the supplied metadata files:
 
 ```bash
 mkdir -p ~/helm_mmlu ~/bbh_analysis
-cp data/mmlu_costs.csv ~/helm_mmlu/
-cp data/bbh_costs.csv data/bbh_sizes.csv ~/bbh_analysis/
+cp mmlu_costs.csv ~/helm_mmlu/
+cp bbh_costs.csv bbh_sizes.csv ~/bbh_analysis/
 ```
 
 ## Reproducing the results
